@@ -1,5 +1,8 @@
 export default {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/tests/e2e/setup-runner.ts'],
+  preset: "ts-jest",
+  testEnvironment: "node",
+  testMatch: ["**/*.test.ts"],
+  testTimeout: 10000,
+  clearMocks: true,
+  detectOpenHandles: true
 };

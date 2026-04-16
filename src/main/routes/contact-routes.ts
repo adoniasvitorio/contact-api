@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router, type Request, type Response } from 'express'
 import { makeContainer } from '../container'
 import { asyncHandler } from '../utils/async-handler'
 
@@ -36,7 +36,7 @@ const container = makeContainer()
  *         description: Contato criado
  */
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req: Request, res: Response) => {
     const result = await container.createContact.execute(req.body)
     res.json(result)
 }))
@@ -52,7 +52,7 @@ router.post('/', asyncHandler(async (req, res) => {
  *       200:
  *         description: Lista de contatos
  */
-router.get('/', asyncHandler(async (_, res) => {
+router.get('/', asyncHandler(async (_: Request, res: Response) => {
     const result = await container.listContact.execute()
     res.json(result)
 }))
@@ -74,8 +74,8 @@ router.get('/', asyncHandler(async (_, res) => {
  *       200:
  *         description: Contato encontrado
  */
-router.get('/:id', asyncHandler(async (req, res) => {
-    const result = await container.getContact.execute(req.params.id)
+router.get('/:id', asyncHandler(async (req: Request, res: Response) => {
+    const result = await container.getContact.execute(req.params.id as string)
     res.json(result)
 }))
 
@@ -100,8 +100,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
  *       404:
  *         description: Contato não encontrado
  */
-router.patch('/:id/deactivate', asyncHandler(async (req, res) => {
-    await container.deactivateContact.execute(req.params.id)
+router.patch('/:id/deactivate', asyncHandler(async (req: Request, res: Response) => {
+    await container.deactivateContact.execute(req.params.id as string)
     res.sendStatus(204)
 }))
 
@@ -126,8 +126,8 @@ router.patch('/:id/deactivate', asyncHandler(async (req, res) => {
  *       404:
  *         description: Contato não encontrado
  */
-router.delete('/:id', asyncHandler(async (req, res) => {
-    await container.deleteContact.execute(req.params.id)
+router.delete('/:id', asyncHandler(async (req: Request, res: Response) => {
+    await container.deleteContact.execute(req.params.id as string)
     res.sendStatus(204)
 }))
 

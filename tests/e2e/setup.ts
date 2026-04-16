@@ -6,7 +6,7 @@ let client: MongoClient
 
 export let db: any
 
-export async function setupE2E() {
+export async function setupDatabase() {
   mongo = await MongoMemoryServer.create()
   const uri = mongo.getUri()
 
@@ -19,7 +19,12 @@ export async function setupE2E() {
   MongoConnection['db'] = db
 }
 
-export async function teardownE2E() {
-  await client.close()
-  await mongo.stop()
+export async function teardownDatabase() {
+  if (client) {
+    await client.close()
+  }
+  if (mongo) {
+    await mongo.stop()
+  }
+  await new Promise(resolve => setTimeout(resolve, 100))
 }

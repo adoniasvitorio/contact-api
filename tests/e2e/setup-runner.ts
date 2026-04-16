@@ -1,9 +1,9 @@
-import { setupE2E, teardownE2E } from './setup';
+import { setupDatabase, teardownDatabase } from './setup';
 
 beforeAll(async () => {
-  await setupE2E();
+  await setupDatabase();
 });
 
 afterAll(async () => {
-  await teardownE2E();
+  await teardownDatabase();
 });
